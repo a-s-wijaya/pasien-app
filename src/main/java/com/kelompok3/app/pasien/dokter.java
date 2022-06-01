@@ -50,7 +50,6 @@ public class dokter extends javax.swing.JFrame {
             Connection con = (Connection)DBconnection.configDB();
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(sql);
-            customRenderer tableColor = new customRenderer();
             
             // Define table model
             tableDokter.setModel(new javax.swing.table.DefaultTableModel(
@@ -62,7 +61,6 @@ public class dokter extends javax.swing.JFrame {
                     }
                 ));
             DefaultTableModel tDktr = (DefaultTableModel) tableDokter.getModel();
-            setTableModel setTableModel = new setTableModel(tableDokter);
             while(rs.next()) {
                 int no = 1;
                 int id = rs.getInt("id_dokter");
@@ -72,11 +70,7 @@ public class dokter extends javax.swing.JFrame {
                 Object[] row  = {id, nama, spesialis, "📝 edit", "🗑️ delete"};
 //                Object[] row  = {tableDokter.getRowCount() + 1, nama, spesialis, "📝 edit", "🗑️ delete"}; 
                 tDktr.addRow(row);
-                tableColor.setColors(Color.decode("#15191C"));
-                tableColor.setTextColors(Color.WHITE);
-                for (int i = 0; i < 5; i++) {
-                    tableDokter.getColumnModel().getColumn(i).setCellRenderer(tableColor);
-                }
+                setTableModel setTableModel = new setTableModel(tableDokter);
             }
         }
         catch(Exception e) {

@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class setTableModel {
     public setTableModel(JTable table) {
         DefaultTableModel tDktr = (DefaultTableModel) table.getModel();
+        customRenderer tableColor = new customRenderer();
         // Set all cells height
         table.setRowHeight(40);
         table.getTableHeader().setOpaque(true);
@@ -27,7 +28,10 @@ public class setTableModel {
 
         table.setDefaultEditor(Object.class, null); // Disable cell editing
         
-        System.out.println("column count: " + table.getColumnCount());
-        System.out.println("this is the name -> " + table.getColumnName(table.getColumnModel().getColumnCount() - 2) + " <-");
+        tableColor.setColors(Color.decode("#15191C"));
+        tableColor.setTextColors(Color.WHITE);
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(tableColor);
+        }
     }
 }

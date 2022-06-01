@@ -38,7 +38,6 @@ public class admin extends javax.swing.JFrame {
     
     public void ShowTableAdmin () {
         DefaultTableModel tb = new DefaultTableModel();
-        customRenderer tableColor = new customRenderer();
         tb.addColumn("ID");
         tb.addColumn("Username");
         tb.addColumn("Password");
@@ -55,12 +54,6 @@ public class admin extends javax.swing.JFrame {
                 tb.addRow(new Object[]{
                     r.getString(1),r.getString(2), censorPass(r.getString(3)), "📝 edit", "🗑️ delete"
                 });
-                tableColor.setColors(Color.decode("#15191C"));
-                tableColor.setTextColors(Color.WHITE);
-                tabel_admin.getColumnModel().getColumn(0).setCellRenderer(tableColor);
-                for (int i = 0; i < tabel_admin.getColumnCount(); i++) {
-                    tabel_admin.getColumnModel().getColumn(i).setCellRenderer(tableColor);
-                }
                 tabel_admin.setModel(tb);
             }
             setTableModel setTableModel = new setTableModel(tabel_admin);
