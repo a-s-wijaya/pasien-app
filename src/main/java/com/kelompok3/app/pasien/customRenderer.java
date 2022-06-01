@@ -15,6 +15,11 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author fauza
  */
+
+/**
+ Class is used to change color of table rows 
+*/
+
 public class customRenderer extends DefaultTableCellRenderer {
     private List<Color> desiredColors = new ArrayList<Color>();
     private List<Color> desiredTextColors = new ArrayList<Color>();
@@ -33,6 +38,8 @@ public class customRenderer extends DefaultTableCellRenderer {
             if(row == i) {
                 cellComponent.setBackground(desiredColors.get(i));
                 cellComponent.setForeground(desiredTextColors.get(i));
+                table.getTableHeader().setBackground(desiredColors.get(i));
+                table.getTableHeader().setForeground(desiredTextColors.get(i));
             }
 //            System.out.println("Row: " + desiredColors.get(i) + row + column + "size: " + desiredColors.size() + " index: " + i);
         }

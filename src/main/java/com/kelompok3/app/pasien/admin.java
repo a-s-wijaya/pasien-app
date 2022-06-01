@@ -405,12 +405,12 @@ public class admin extends javax.swing.JFrame {
                 fieldCariKeyReleased(evt);
             }
         });
-        contentPane.add(fieldCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 320, 39));
+        contentPane.add(fieldCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 320, 39));
 
         labelCari.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
         labelCari.setForeground(new java.awt.Color(255, 255, 255));
         labelCari.setText("Cari");
-        contentPane.add(labelCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, -1, 40));
+        contentPane.add(labelCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, -1, 40));
 
         labelSpesialis1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         labelSpesialis1.setForeground(new java.awt.Color(255, 255, 255));
@@ -441,7 +441,7 @@ public class admin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabel_admin);
 
-        contentPane.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 470, 530));
+        contentPane.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 470, 530));
         jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
 
         labelSpesialis2.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N

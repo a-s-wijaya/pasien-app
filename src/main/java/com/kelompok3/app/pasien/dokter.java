@@ -6,6 +6,8 @@ package com.kelompok3.app.pasien;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -440,6 +442,12 @@ public class dokter extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableDokter);
+        tableDokter.getTableHeader().setReorderingAllowed(false);
+        tableDokter.getTableHeader().addMouseListener(new MouseAdapter() {
+            public void headerMouseClicked(MouseEvent e) {
+                tableDokterHeaderMouseClicked(e);
+            }
+        });
 
         contentPane.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 500, 540));
         jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
@@ -487,26 +495,30 @@ public class dokter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        
-        try{
-            String namaDokter = fieldNama.getText();
-            String spesialisDokter = fieldSpesialis.getText();
-            
-            String sql = "INSERT INTO dokter VALUES(NULL, ?, ?)";
-            
-            Connection con = DBconnection.configDB();
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, namaDokter);
-            ps.setString(2, spesialisDokter);
-            
-            ps.executeUpdate();
-            System.out.println(ps);
+        if(fieldNama.getText() == "" || fieldSpesialis.getText() == ""){
+            JOptionPane.showMessageDialog(null, (fieldNama.getText() == "") ? ("Masukan nama harus diisi") : ("Masukan spesialis harus diisi"), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            try{
+                String namaDokter = fieldNama.getText();
+                String spesialisDokter = fieldSpesialis.getText();
 
-            JOptionPane.showMessageDialog(null, "Add Data Success", "Success", JOptionPane.INFORMATION_MESSAGE);
-            showDataDokter("SELECT * FROM dokter");
-            clean();
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Something went wrong: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+                String sql = "INSERT INTO dokter VALUES(NULL, ?, ?)";
+
+                Connection con = DBconnection.configDB();
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setString(1, namaDokter);
+                ps.setString(2, spesialisDokter);
+
+                ps.executeUpdate();
+                System.out.println(ps);
+
+                JOptionPane.showMessageDialog(null, "Add Data Success", "Success", JOptionPane.INFORMATION_MESSAGE);
+                showDataDokter("SELECT * FROM dokter");
+                clean();
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(null, "Something went wrong: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
@@ -560,7 +572,14 @@ public class dokter extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tableDokterMouseClicked
-
+    
+    private void tableDokterHeaderMouseClicked(MouseEvent e) {
+        int col = tableDokter.columnAtPoint(e.getPoint());
+        String name = tableDokter.getColumnName(col);
+        JOptionPane.showMessageDialog(null, name);
+        System.out.println("name: " + col);
+    }
+    
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
          try {
             String newNama = fieldNama.getText();

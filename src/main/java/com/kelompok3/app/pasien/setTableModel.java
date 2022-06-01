@@ -16,10 +16,10 @@ public class setTableModel {
     public setTableModel(JTable table) {
         DefaultTableModel tDktr = (DefaultTableModel) table.getModel();
         customRenderer tableColor = new customRenderer();
-        // Set all cells height
+        // Set all cells height on header
         table.setRowHeight(40);
         table.getTableHeader().setOpaque(true);
-        table.getTableHeader().setBackground(Color.decode("#15191C"));
+//        table.getTableHeader().setBackground(Color.decode("#15191C"));
 
         // Set width for ID, edit and delete
         table.getColumnModel().getColumn(0).setMaxWidth(40);
@@ -30,6 +30,8 @@ public class setTableModel {
         
         tableColor.setColors(Color.decode("#15191C"));
         tableColor.setTextColors(Color.WHITE);
+        
+        // Set color based on number of columns
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(tableColor);
         }

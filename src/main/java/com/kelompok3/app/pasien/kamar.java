@@ -38,7 +38,7 @@ public class kamar extends javax.swing.JFrame {
             }
             tabel_pasien.setModel(tb);
         } catch (Exception e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }    
     
@@ -58,7 +58,8 @@ public class kamar extends javax.swing.JFrame {
                 });
             }
             tabel_kamar.setModel(tb);
-        } catch (Exception e){      
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -113,8 +114,6 @@ public class kamar extends javax.swing.JFrame {
         b_edit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_kamar = new javax.swing.JTable();
-        fieldCari = new javax.swing.JTextField();
-        labelCari = new javax.swing.JLabel();
         in_status = new javax.swing.JComboBox<>();
         labelSpesialis1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -389,10 +388,12 @@ public class kamar extends javax.swing.JFrame {
         labelSpesialis.setText("Status");
         contentPane.add(labelSpesialis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
+        in_pasien.setEditable(false);
         in_pasien.setBackground(new java.awt.Color(255, 255, 255));
         contentPane.add(in_pasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 250, 39));
 
         b_tambah.setBackground(new java.awt.Color(21, 25, 28));
+        b_tambah.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         b_tambah.setForeground(new java.awt.Color(255, 255, 255));
         b_tambah.setText("Tambah");
         b_tambah.setBorder(null);
@@ -405,6 +406,7 @@ public class kamar extends javax.swing.JFrame {
         contentPane.add(b_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 109, 49));
 
         b_edit.setBackground(new java.awt.Color(21, 25, 28));
+        b_edit.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         b_edit.setForeground(new java.awt.Color(255, 255, 255));
         b_edit.setText("Ubah");
         b_edit.setBorder(null);
@@ -447,19 +449,6 @@ public class kamar extends javax.swing.JFrame {
         contentPane.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 450, 210));
         jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
 
-        fieldCari.setBackground(new java.awt.Color(255, 255, 255));
-        fieldCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                fieldCariKeyReleased(evt);
-            }
-        });
-        contentPane.add(fieldCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 320, 39));
-
-        labelCari.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
-        labelCari.setForeground(new java.awt.Color(255, 255, 255));
-        labelCari.setText("Cari");
-        contentPane.add(labelCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, -1, 40));
-
         in_status.setBackground(new java.awt.Color(255, 255, 255));
         in_status.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         in_status.setForeground(new java.awt.Color(21, 25, 28));
@@ -499,6 +488,7 @@ public class kamar extends javax.swing.JFrame {
         jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
 
         b_hapus.setBackground(new java.awt.Color(21, 25, 28));
+        b_hapus.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         b_hapus.setForeground(new java.awt.Color(255, 255, 255));
         b_hapus.setText("Hapus");
         b_hapus.setBorder(null);
@@ -511,6 +501,7 @@ public class kamar extends javax.swing.JFrame {
         contentPane.add(b_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 110, 50));
 
         b_clear.setBackground(new java.awt.Color(21, 25, 28));
+        b_clear.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         b_clear.setForeground(new java.awt.Color(255, 255, 255));
         b_clear.setText("Clear");
         b_clear.setBorder(null);
@@ -632,11 +623,6 @@ public class kamar extends javax.swing.JFrame {
         clean();
     }//GEN-LAST:event_b_clearActionPerformed
 
-    private void fieldCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariKeyReleased
-//        String sql = "SELECT * FROM dokter WHERE id_dokter LIKE '%" + fieldCari.getText() + "%' OR nama_dokter LIKE '%" + fieldCari.getText() + "%' OR spesialis LIKE '%" + fieldCari.getText() + "%'";
-//        showDataDokter(sql);
-    }//GEN-LAST:event_fieldCariKeyReleased
-
     private void itemSidebar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemSidebar3MouseClicked
         new dokter().setVisible(true);
         this.setVisible(false);
@@ -705,7 +691,6 @@ public class kamar extends javax.swing.JFrame {
     private javax.swing.JButton b_tambah;
     private javax.swing.JPanel background;
     private javax.swing.JPanel contentPane;
-    private javax.swing.JTextField fieldCari;
     private javax.swing.JLabel iconAdmin;
     private javax.swing.JLabel iconAdmin1;
     private javax.swing.JLabel iconDokter;
@@ -724,7 +709,6 @@ public class kamar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel labelCari;
     private javax.swing.JLabel labelMenu0;
     private javax.swing.JLabel labelMenu1;
     private javax.swing.JLabel labelMenu2;

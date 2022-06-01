@@ -416,6 +416,7 @@ public class pasien extends javax.swing.JFrame {
         contentPane.add(txtUsia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 250, 39));
 
         btnSimpan.setBackground(new java.awt.Color(21, 25, 28));
+        btnSimpan.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
         btnSimpan.setText("Tambah");
         btnSimpan.setBorder(null);
@@ -428,6 +429,7 @@ public class pasien extends javax.swing.JFrame {
         contentPane.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 109, 49));
 
         btnEdit.setBackground(new java.awt.Color(21, 25, 28));
+        btnEdit.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("Ubah");
         btnEdit.setBorder(null);
@@ -450,7 +452,7 @@ public class pasien extends javax.swing.JFrame {
         labelCari.setForeground(new java.awt.Color(255, 255, 255));
         labelCari.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelCari.setText("Id Kamar");
-        contentPane.add(labelCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, 40));
+        contentPane.add(labelCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, -1, 40));
 
         cboJK.setBackground(new java.awt.Color(255, 255, 255));
         cboJK.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
@@ -464,6 +466,7 @@ public class pasien extends javax.swing.JFrame {
         contentPane.add(labelSpesialis1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         btnHapus.setBackground(new java.awt.Color(21, 25, 28));
+        btnHapus.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         btnHapus.setForeground(new java.awt.Color(255, 255, 255));
         btnHapus.setText("Hapus");
         btnHapus.setBorder(null);
@@ -476,6 +479,7 @@ public class pasien extends javax.swing.JFrame {
         contentPane.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 110, 50));
 
         btnClear.setBackground(new java.awt.Color(21, 25, 28));
+        btnClear.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setText("Clear");
         btnClear.setBorder(null);
@@ -531,7 +535,7 @@ public class pasien extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbPasien);
 
-        contentPane.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 450, 310));
+        contentPane.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 450, 310));
         jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
 
         jScrollPane3.setBackground(new java.awt.Color(35, 40, 44));
@@ -560,7 +564,7 @@ public class pasien extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tbKamar);
 
-        contentPane.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 450, 210));
+        contentPane.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 450, 210));
         jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
 
         background.add(contentPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 820, 630));
