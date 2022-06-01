@@ -449,7 +449,7 @@ public class pasien extends javax.swing.JFrame {
         labelCari.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
         labelCari.setForeground(new java.awt.Color(255, 255, 255));
         labelCari.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        labelCari.setText("Cari (id)");
+        labelCari.setText("Id Kamar");
         contentPane.add(labelCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, 40));
 
         cboJK.setBackground(new java.awt.Color(255, 255, 255));

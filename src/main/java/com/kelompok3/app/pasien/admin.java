@@ -22,7 +22,7 @@ public class admin extends javax.swing.JFrame {
      */
     public admin() {
         initComponents();
-        ShowTableAdmin();
+        ShowTableAdmin("SELECT id, username, LENGTH(password) FROM admin");
         clean();
         btnCancelEdit.setVisible(false);
         edit.setEnabled(false);
@@ -30,13 +30,14 @@ public class admin extends javax.swing.JFrame {
     
     String censorPass(String count) {
         String censored = "";
-        for (int i = 0; i < Integer.parseInt(count); i++) {
-            censored = censored + "*";
-        }
+//        for (int i = 0; i < Integer.parseInt(count); i++) {
+//            censored = censored + "*";
+//        }
+        censored = new String(new char[Integer.parseInt(count)]).replace("\0", "*");
         return censored;
     }
     
-    public void ShowTableAdmin () {
+    public void ShowTableAdmin (String query) {
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("ID");
         tb.addColumn("Username");
@@ -45,7 +46,6 @@ public class admin extends javax.swing.JFrame {
         tb.addColumn("");
         
         try {
-            String query = "SELECT id, username, LENGTH(password) FROM admin";
             java.sql.Connection conn =(Connection)DBconnection.configDB();
             java.sql.Statement s = conn.createStatement();
             java.sql.ResultSet r = s.executeQuery(query);
@@ -534,7 +534,7 @@ public class admin extends javax.swing.JFrame {
                 java.sql.PreparedStatement pst = conn.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan");
-                ShowTableAdmin();
+                ShowTableAdmin("SELECT id, username, LENGTH(password) FROM admin");
                 clean();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Data Gagal Ditambahkan");
@@ -558,7 +558,7 @@ public class admin extends javax.swing.JFrame {
                 java.sql.PreparedStatement pst = conn.prepareStatement(Q);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Data Berhasil Diubah");
-                ShowTableAdmin();
+                ShowTableAdmin("SELECT id, username, LENGTH(password) FROM admin");
                 clean();
                 simpan.setEnabled(true);
                 btnCancelEdit.setVisible(false);
@@ -571,8 +571,8 @@ public class admin extends javax.swing.JFrame {
     }//GEN-LAST:event_editActionPerformed
 
     private void fieldCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariKeyReleased
-        //        String sql = "SELECT * FROM dokter WHERE id_dokter LIKE '%" + fieldCari.getText() + "%' OR nama_dokter LIKE '%" + fieldCari.getText() + "%' OR spesialis LIKE '%" + fieldCari.getText() + "%'";
-        //        showDataDokter(sql);
+                String sql = "SELECT id, username, LENGTH(password) FROM admin WHERE id LIKE '%" + fieldCari.getText() + "%' OR username LIKE '%" + fieldCari.getText() + "%'";
+                ShowTableAdmin(sql);
     }//GEN-LAST:event_fieldCariKeyReleased
 
     private void tabel_adminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_adminMouseClicked
@@ -614,7 +614,7 @@ public class admin extends javax.swing.JFrame {
                         java.sql.PreparedStatement pst = conn.prepareStatement(Q);
                         pst.execute();
                         JOptionPane.showMessageDialog(null, "Delete Success", "Success", JOptionPane.INFORMATION_MESSAGE);
-                        ShowTableAdmin();
+                        ShowTableAdmin("SELECT id, username, LENGTH(password) FROM admin");
                         clean();
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Data Gagal Dihapus", "Error", JOptionPane.ERROR_MESSAGE);
