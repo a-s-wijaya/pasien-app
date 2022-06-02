@@ -37,7 +37,6 @@ public class dokter extends javax.swing.JFrame {
     public dokter() {
         initComponents();
         showDataDokter("SELECT * FROM dokter");
-        System.out.println(sidePane.getWidth());
         btnCancelEdit.setVisible(false);
         btnEdit.setEnabled(false);
     }
@@ -440,12 +439,15 @@ public class dokter extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableDokterMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tableDokterMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tableDokter);
         tableDokter.getTableHeader().setReorderingAllowed(false);
-        tableDokter.getTableHeader().addMouseListener(new MouseAdapter() {
-            public void headerMouseClicked(MouseEvent e) {
-                tableDokterHeaderMouseClicked(e);
+        tableDokter.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                tableDokterHeaderMousePressed(evt);
             }
         });
 
@@ -522,6 +524,20 @@ public class dokter extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    private void tableDokterHeaderMousePressed(java.awt.event.MouseEvent evt) {
+        int col = tableDokter.columnAtPoint(evt.getPoint());
+        int row = tableDokter.rowAtPoint(evt.getPoint());
+        if(col == 0) {
+            showDataDokter("SELECT * FROM dokter");
+        }
+        else if(col == 1){
+            showDataDokter("SELECT * FROM dokter ORDER BY nama_dokter ASC");
+        }
+        else if(col == 2) {
+            showDataDokter("SELECT * FROM dokter ORDER BY spesialis ASC");
+        }
+    }
+    
     private void tableDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDokterMouseClicked
         int row = tableDokter.rowAtPoint(evt.getPoint());
         int col = tableDokter.columnAtPoint(evt.getPoint());
@@ -614,7 +630,6 @@ public class dokter extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldCariKeyReleased
 
     private void itemSidebar0MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemSidebar0MouseClicked
-        // 200
         if(sidePaneHidden == false) {
             sidePane.setBounds(sidePane.getX(), sidePane.getY(), 72, sidePane.getHeight());
             contentPane.setBounds(contentPane.getX() - 72, contentPane.getY(), contentPane.getWidth() + 72 , contentPane.getHeight());
@@ -657,6 +672,10 @@ public class dokter extends javax.swing.JFrame {
         btnSubmit.setEnabled(true);
         btnEdit.setEnabled(false);
     }//GEN-LAST:event_btnCancelEditActionPerformed
+
+    private void tableDokterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDokterMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableDokterMousePressed
 
     /**
      * @param args the command line arguments

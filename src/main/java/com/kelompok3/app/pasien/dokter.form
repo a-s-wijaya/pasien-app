@@ -641,7 +641,7 @@
                       </Table>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" preCode="tableDokter.getTableHeader().setReorderingAllowed(false);" postCode="tableDokter.getTableHeader().addMouseListener(new MouseAdapter() {&#xa;    public void headerMouseClicked(MouseEvent e) {&#xa;        tableDokterHeaderMouseClicked(e);&#xa;    }&#xa;});">
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" preCode="tableDokter.getTableHeader().setReorderingAllowed(false);" postCode="tableDokter.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    public void mousePressed(MouseEvent evt) {&#xa;        tableDokterHeaderMousePressed(evt);&#xa;    }&#xa;});">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
@@ -681,6 +681,7 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableDokterMouseClicked"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableDokterMousePressed"/>
                   </Events>
                 </Component>
               </SubComponents>
