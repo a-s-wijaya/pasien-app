@@ -16,7 +16,8 @@ public class setTableModel {
     private int firstSize = 40;
     private int editSize = 60;
     private int deleteSize = 60;
-    private String color = "#15191C";
+    private String rowColor = "#15191C";
+    private String textColor = "#FFFFFF";
     
     public setTableModel() {
         
@@ -37,8 +38,8 @@ public class setTableModel {
 
         table.setDefaultEditor(Object.class, null); // Disable cell editing
         
-        tableColor.setColors(Color.decode("#15191C"));
-        tableColor.setTextColors(Color.WHITE);
+        tableColor.setColors(Color.decode(rowColor));
+        tableColor.setTextColors(Color.decode(textColor));
         
         // Set color based on number of columns
         for (int i = 0; i < table.getColumnCount(); i++) {
@@ -62,7 +63,19 @@ public class setTableModel {
         return this;
     }
     
-    String setColor(String color) {
-        return color;
+    public setTableModel setRowColor(String color) {
+        if (color.charAt(0) != '#') {
+            color = "#" + color;
+        }
+        this.rowColor = color;
+        return this;
+    }
+    
+    public setTableModel setRowTextColor(String color) {
+        if (color.charAt(0) != '#') {
+            color = "#" + color;
+        }
+        this.textColor = color;
+        return this;
     }
 }
