@@ -57,7 +57,7 @@ public class admin extends javax.swing.JFrame {
                 });
                 tabel_admin.setModel(tb);
             }
-            setTableModel setTableModel = new setTableModel(tabel_admin);
+            setTableModel setTableModel = new setTableModel().build(tabel_admin);
             
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, e);

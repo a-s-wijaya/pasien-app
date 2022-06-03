@@ -13,7 +13,16 @@ import javax.swing.table.DefaultTableModel;
  * @author fauza
  */
 public class setTableModel {
-    public setTableModel(JTable table) {
+    private int firstSize = 40;
+    private int editSize = 60;
+    private int deleteSize = 60;
+    private String color = "#15191C";
+    
+    public setTableModel() {
+        
+    }
+    
+    public setTableModel build(JTable table) {
         DefaultTableModel tDktr = (DefaultTableModel) table.getModel();
         customRenderer tableColor = new customRenderer();
         // Set all cells height on header
@@ -22,9 +31,9 @@ public class setTableModel {
 //        table.getTableHeader().setBackground(Color.decode("#15191C"));
 
         // Set width for ID, edit and delete
-        table.getColumnModel().getColumn(0).setMaxWidth(40);
-        table.getColumnModel().getColumn(table.getColumnModel().getColumnCount() - 2).setMaxWidth(60);
-        table.getColumnModel().getColumn(table.getColumnModel().getColumnCount() - 1).setMaxWidth(60);
+        table.getColumnModel().getColumn(0).setMaxWidth(firstSize);
+        table.getColumnModel().getColumn(table.getColumnModel().getColumnCount() - 2).setMaxWidth(editSize);
+        table.getColumnModel().getColumn(table.getColumnModel().getColumnCount() - 1).setMaxWidth(deleteSize);
 
         table.setDefaultEditor(Object.class, null); // Disable cell editing
         
@@ -35,5 +44,25 @@ public class setTableModel {
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(tableColor);
         }
+        return this;
+    }
+    
+    public setTableModel setLastTwo(int size) {
+        this.editSize = size;
+        return this;
+    }
+    
+    public setTableModel setLast(int size) {
+        this.deleteSize = size;
+        return this;
+    }
+    
+    public setTableModel setFirst(int size) {
+        this.firstSize = size;
+        return this;
+    }
+    
+    String setColor(String color) {
+        return color;
     }
 }

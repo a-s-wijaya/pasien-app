@@ -71,7 +71,7 @@ public class dokter extends javax.swing.JFrame {
                 Object[] row  = {id, nama, spesialis, "📝 edit", "🗑️ delete"};
 //                Object[] row  = {tableDokter.getRowCount() + 1, nama, spesialis, "📝 edit", "🗑️ delete"}; 
                 tDktr.addRow(row);
-                setTableModel setTableModel = new setTableModel(tableDokter);
+                setTableModel setTableModel = new setTableModel().build(tableDokter);
             }
         }
         catch(Exception e) {

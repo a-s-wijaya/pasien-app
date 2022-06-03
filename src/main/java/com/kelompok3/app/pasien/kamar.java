@@ -22,31 +22,21 @@ public class kamar extends javax.swing.JFrame {
      * Creates new form kamar
      */
     
-    public void showTablePasien() {
-        DefaultTableModel tb = new DefaultTableModel();
-        tb.addColumn("id_pasien");
-        tb.addColumn("nama_pasien");        
-        try {
-            String query = "SELECT id_pasien, nama_pasien FROM pasien";
-            java.sql.Connection conn=(Connection)DBconnection.configDB();
-            java.sql.Statement s = conn.createStatement();
-            java.sql.ResultSet r = s.executeQuery(query);
-            while (r.next()){
-                tb.addRow(new Object[]{
-                    r.getString(1),r.getString(2)
-                });
-            }
-            tabel_pasien.setModel(tb);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+    String checkNull(String field) {
+        if (field == null) {
+            field = "Tidak Ada";
         }
-    }    
+        
+        return field;
+    }
     
-    public void showTableKamar() {
+    public void showTableKamar(String sql) {
     DefaultTableModel tb = new DefaultTableModel();
-    tb.addColumn("kode_kamar");
-    tb.addColumn("id_pasien");
+    tb.addColumn("kode kamar");
+    tb.addColumn("id pasien");
     tb.addColumn("status");
+    tb.addColumn("");
+    tb.addColumn("");
         try {
             String query = "SELECT * FROM kamar";
             java.sql.Connection conn=(Connection)DBconnection.configDB();
@@ -54,10 +44,12 @@ public class kamar extends javax.swing.JFrame {
             java.sql.ResultSet r = s.executeQuery(query);
             while (r.next()){
                 tb.addRow(new Object[]{
-                    r.getString(1),r.getString(2),r.getString(3)
+                    r.getString(1),checkNull(r.getString(2)),r.getString(3), "ø kosongkan", "🗑️ delete"
                 });
             }
             tabel_kamar.setModel(tb);
+            setTableModel setTableModel = new setTableModel().setFirst(100).setLast(70).setLastTwo(90).build(tabel_kamar);
+            
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -65,13 +57,11 @@ public class kamar extends javax.swing.JFrame {
     
     private void clean(){
         in_kamar.setText(null);
-        in_pasien.setText(null);
     }
     
     public kamar() {
         initComponents();
-        showTableKamar();
-        showTablePasien();
+        showTableKamar("SELECT * FROM kamar");
         clean();
     }
 
@@ -108,18 +98,11 @@ public class kamar extends javax.swing.JFrame {
         contentPane = new javax.swing.JPanel();
         in_kamar = new javax.swing.JTextField();
         labelNama = new javax.swing.JLabel();
-        labelSpesialis = new javax.swing.JLabel();
-        in_pasien = new javax.swing.JTextField();
         b_tambah = new javax.swing.JButton();
-        b_edit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_kamar = new javax.swing.JTable();
-        in_status = new javax.swing.JComboBox<>();
-        labelSpesialis1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabel_pasien = new javax.swing.JTable();
-        b_hapus = new javax.swing.JButton();
-        b_clear = new javax.swing.JButton();
+        labelCari = new javax.swing.JLabel();
+        fieldCari = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -376,21 +359,12 @@ public class kamar extends javax.swing.JFrame {
         contentPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         in_kamar.setBackground(new java.awt.Color(255, 255, 255));
-        contentPane.add(in_kamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 250, 39));
+        contentPane.add(in_kamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 250, 39));
 
         labelNama.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
         labelNama.setForeground(new java.awt.Color(255, 255, 255));
         labelNama.setText("Kode Kamar");
-        contentPane.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
-
-        labelSpesialis.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        labelSpesialis.setForeground(new java.awt.Color(255, 255, 255));
-        labelSpesialis.setText("Status");
-        contentPane.add(labelSpesialis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
-
-        in_pasien.setEditable(false);
-        in_pasien.setBackground(new java.awt.Color(255, 255, 255));
-        contentPane.add(in_pasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 250, 39));
+        contentPane.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         b_tambah.setBackground(new java.awt.Color(21, 25, 28));
         b_tambah.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
@@ -403,19 +377,7 @@ public class kamar extends javax.swing.JFrame {
                 b_tambahActionPerformed(evt);
             }
         });
-        contentPane.add(b_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 109, 49));
-
-        b_edit.setBackground(new java.awt.Color(21, 25, 28));
-        b_edit.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        b_edit.setForeground(new java.awt.Color(255, 255, 255));
-        b_edit.setText("Ubah");
-        b_edit.setBorder(null);
-        b_edit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_editActionPerformed(evt);
-            }
-        });
-        contentPane.add(b_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 109, 49));
+        contentPane.add(b_tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 250, 49));
 
         jScrollPane1.setBackground(new java.awt.Color(35, 40, 44));
         jScrollPane1.setBorder(null);
@@ -446,72 +408,21 @@ public class kamar extends javax.swing.JFrame {
             tabel_kamar.getColumnModel().getColumn(0).setHeaderValue("kode_kamar");
         }
 
-        contentPane.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 450, 210));
+        contentPane.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 510, 540));
         jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
 
-        in_status.setBackground(new java.awt.Color(255, 255, 255));
-        in_status.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        in_status.setForeground(new java.awt.Color(21, 25, 28));
-        in_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kosong", "Penuh" }));
-        contentPane.add(in_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 250, 40));
+        labelCari.setFont(new java.awt.Font("Poppins", 0, 16)); // NOI18N
+        labelCari.setForeground(new java.awt.Color(255, 255, 255));
+        labelCari.setText("Cari");
+        contentPane.add(labelCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, -1, 40));
 
-        labelSpesialis1.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        labelSpesialis1.setForeground(new java.awt.Color(255, 255, 255));
-        labelSpesialis1.setText("Id Pasien");
-        contentPane.add(labelSpesialis1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
-
-        jScrollPane2.setBackground(new java.awt.Color(35, 40, 44));
-        jScrollPane2.setBorder(null);
-
-        tabel_pasien.setForeground(new java.awt.Color(0, 0, 0));
-        tabel_pasien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "id_pasien", "nama_pasien"
-            }
-        ));
-        tabel_pasien.setToolTipText("");
-        tabel_pasien.setOpaque(false);
-        tabel_pasien.setSelectionForeground(new java.awt.Color(21, 25, 28));
-        tabel_pasien.setShowGrid(true);
-        tabel_pasien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabel_pasienMouseClicked(evt);
+        fieldCari.setBackground(new java.awt.Color(255, 255, 255));
+        fieldCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                fieldCariKeyReleased(evt);
             }
         });
-        jScrollPane2.setViewportView(tabel_pasien);
-
-        contentPane.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 450, 310));
-        jScrollPane1.getViewport().setBackground(new java.awt.Color(35,40,44));
-
-        b_hapus.setBackground(new java.awt.Color(21, 25, 28));
-        b_hapus.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        b_hapus.setForeground(new java.awt.Color(255, 255, 255));
-        b_hapus.setText("Hapus");
-        b_hapus.setBorder(null);
-        b_hapus.setOpaque(true);
-        b_hapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_hapusActionPerformed(evt);
-            }
-        });
-        contentPane.add(b_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 110, 50));
-
-        b_clear.setBackground(new java.awt.Color(21, 25, 28));
-        b_clear.setFont(new java.awt.Font("Poppins", 0, 14)); // NOI18N
-        b_clear.setForeground(new java.awt.Color(255, 255, 255));
-        b_clear.setText("Clear");
-        b_clear.setBorder(null);
-        b_clear.setOpaque(true);
-        b_clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_clearActionPerformed(evt);
-            }
-        });
-        contentPane.add(b_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, 110, 50));
+        contentPane.add(fieldCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 320, 39));
 
         background.add(contentPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 820, 630));
 
@@ -549,13 +460,12 @@ public class kamar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "kode_kamar tidak boleh kosong");
         }else{
             try {
-                String sql = "INSERT INTO kamar VALUES ('"+in_kamar.getText()+"','"+in_pasien.getText()+"','"+in_status.getSelectedItem()+"')";
+                String sql = "INSERT INTO kamar VALUES ('"+in_kamar.getText()+"', NULL,'Kosong')";
                 java.sql.Connection conn=(Connection)DBconnection.configDB();
                 java.sql.PreparedStatement pst=conn.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan");
-                showTableKamar();
-                showTablePasien();
+                showTableKamar("SELECT * FROM kamar");
                 clean();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Tambah Data Gagal");
@@ -564,64 +474,65 @@ public class kamar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_b_tambahActionPerformed
 
-    private void b_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_editActionPerformed
-        String kamar = in_kamar.getText();
-        String pasien = in_pasien.getText();
-        String status = (String) in_status.getSelectedItem();
-        if(in_kamar.equals("")){
-            JOptionPane.showMessageDialog(null, "kode_kamar tidak boleh kosong");
-        }else{
-            try{
-                String query = "UPDATE kamar SET kode_kamar = '"+kamar+"', id_pasien = "+pasien+", status = '"+status+"' WHERE kode_kamar = '"+kamar+"'";
-                Connection conn = (Connection)DBconnection.configDB();
-                java.sql.PreparedStatement pst = conn.prepareStatement(query);
-                pst.execute();
-                JOptionPane.showMessageDialog(null, "Data Berhasil Diubah");
-                showTableKamar();
-                showTablePasien();
-                clean();
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(null, "Ubah Data Gagal");
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }   
-        }
-    }//GEN-LAST:event_b_editActionPerformed
-
     private void tabel_kamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_kamarMouseClicked
-        int baris = tabel_kamar.rowAtPoint(evt.getPoint());
-        String kamar = tabel_kamar.getValueAt(baris, 0).toString();
-        in_kamar.setText(kamar);
-        String pasien = tabel_kamar.getValueAt(baris, 1).toString();
-        in_pasien.setText(pasien);
-        String status = tabel_kamar.getValueAt(baris, 2).toString();
-        in_status.setSelectedItem(status);
-    }//GEN-LAST:event_tabel_kamarMouseClicked
+        int row = tabel_kamar.rowAtPoint(evt.getPoint());
+        int col = tabel_kamar.columnAtPoint(evt.getPoint());
+        
+        if(row >= 0 && col >= 0) {
+            Object getKd = tabel_kamar.getValueAt(row, 0);
+            String kd_kamar = String.valueOf(getKd);
+            if(col == tabel_kamar.getColumnCount() - 2){
+                int res = JOptionPane.showConfirmDialog(null, "Apakah kamu yakin ingin mengosongkan kamar?", "Kosongkan Kamar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if(res == JOptionPane.YES_OPTION) {
+                    try {
+                        String sql = "UPDATE kamar SET id_pasien = NULL WHERE kode_kamar = ?";
+                    
+                        Connection con = DBconnection.configDB();
+                        PreparedStatement ps = con.prepareStatement(sql);
+                        ps.setString(1, kd_kamar);
+                        ps.executeUpdate();
+                        
+                        showTableKamar("SELECT * FROM kamar");
+                        JOptionPane.showMessageDialog(null, "Berhasil dikosongkan", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Something went wrong: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else if(res == JOptionPane.NO_OPTION) {
+                    System.out.println("kosongkan.abort");
+                }
+                else {
+                    System.out.println("kosongkan.cancel");
+                }
+            }
+            else if(col == tabel_kamar.getColumnCount() - 1) {
+                int res = JOptionPane.showConfirmDialog(null, "Apakah kamu yakin ingin mengosongkan kamar?", "Kosongkan Kamar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if(res == JOptionPane.YES_OPTION) {
+                    try {
+                        String sql = "DELETE FROM kamar WHERE kode_kamar = ?";
 
-    private void tabel_pasienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_pasienMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tabel_pasienMouseClicked
+                        Connection con = DBconnection.configDB();
+                        PreparedStatement ps = con.prepareStatement(sql);
+                        ps.setString(1, kd_kamar);
+                        ps.executeUpdate();
 
-    private void b_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_hapusActionPerformed
-        String kamar = in_kamar.getText();
-        String pasien = in_pasien.getText();
-        String status = (String) in_status.getSelectedItem();
-        try {
-            String query = "DELETE FROM kamar WHERE kode_kamar = '"+kamar+"'";
-            Connection conn = (Connection)DBconnection.configDB();
-            java.sql.PreparedStatement pst = conn.prepareStatement(query);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
-            showTableKamar();
-            showTablePasien();
-            clean();
-        } catch (Exception e){
-            
+                        showTableKamar("SELECT * FROM kamar");
+                        JOptionPane.showMessageDialog(null, "Delete Success", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    catch(Exception e) {
+                        JOptionPane.showMessageDialog(null, "Something went wrong: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else if(res == JOptionPane.NO_OPTION) {
+                    System.out.println("delete.abort");
+                }
+                else {
+                    System.out.println("delete.cancel");
+                }
+            }
         }
-    }//GEN-LAST:event_b_hapusActionPerformed
-
-    private void b_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_clearActionPerformed
-        clean();
-    }//GEN-LAST:event_b_clearActionPerformed
+    }//GEN-LAST:event_tabel_kamarMouseClicked
 
     private void itemSidebar3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemSidebar3MouseClicked
         new dokter().setVisible(true);
@@ -646,6 +557,11 @@ public class kamar extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_itemSidebar5MouseClicked
+
+    private void fieldCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fieldCariKeyReleased
+        String sql = "SELECT * FROM kamar WHERE kode_dokter LIKE '%" + fieldCari.getText() + "%'";
+        showTableKamar(sql);
+    }//GEN-LAST:event_fieldCariKeyReleased
     
     
     /**
@@ -685,12 +601,10 @@ public class kamar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton b_clear;
-    private javax.swing.JButton b_edit;
-    private javax.swing.JButton b_hapus;
     private javax.swing.JButton b_tambah;
     private javax.swing.JPanel background;
     private javax.swing.JPanel contentPane;
+    private javax.swing.JTextField fieldCari;
     private javax.swing.JLabel iconAdmin;
     private javax.swing.JLabel iconAdmin1;
     private javax.swing.JLabel iconDokter;
@@ -698,8 +612,6 @@ public class kamar extends javax.swing.JFrame {
     private javax.swing.JLabel iconPasien;
     private javax.swing.JLabel iconTitle;
     private javax.swing.JTextField in_kamar;
-    private javax.swing.JTextField in_pasien;
-    private javax.swing.JComboBox<String> in_status;
     private javax.swing.JPanel itemSidebar0;
     private javax.swing.JPanel itemSidebar1;
     private javax.swing.JPanel itemSidebar2;
@@ -707,8 +619,8 @@ public class kamar extends javax.swing.JFrame {
     private javax.swing.JPanel itemSidebar4;
     private javax.swing.JPanel itemSidebar5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelCari;
     private javax.swing.JLabel labelMenu0;
     private javax.swing.JLabel labelMenu1;
     private javax.swing.JLabel labelMenu2;
@@ -716,10 +628,7 @@ public class kamar extends javax.swing.JFrame {
     private javax.swing.JLabel labelMenu4;
     private javax.swing.JLabel labelMenu5;
     private javax.swing.JLabel labelNama;
-    private javax.swing.JLabel labelSpesialis;
-    private javax.swing.JLabel labelSpesialis1;
     private javax.swing.JPanel sidePane;
     private javax.swing.JTable tabel_kamar;
-    private javax.swing.JTable tabel_pasien;
     // End of variables declaration//GEN-END:variables
 }
