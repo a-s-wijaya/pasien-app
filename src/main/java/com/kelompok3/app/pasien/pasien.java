@@ -715,18 +715,9 @@ public class pasien extends javax.swing.JFrame {
     }//GEN-LAST:event_tbPasienMouseClicked
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        int baris = tbPasien.rowAtPoint(evt.getPoint());
-        id_pasien =   tbPasien.getValueAt(baris, 0).toString();
-        String nama =   tbPasien.getValueAt(baris, 1).toString();
-        txtNama.setText(nama);
-        String usia =   tbPasien.getValueAt(baris, 2).toString();
-        txtUsia.setText(usia);
-        String jk =   tbPasien.getValueAt(baris, 3).toString();
-        cboJK.setSelectedItem(jk);
-        String noTelp =   tbPasien.getValueAt(baris, 4).toString();
-        txtNoTelp.setText(noTelp);
-        String alamat =   tbPasien.getValueAt(baris, 5).toString();
-        txtaAlamat.setText(alamat);
+        int baris = tbKamar.rowAtPoint(evt.getPoint());
+        String noKamar =   tbKamar.getValueAt(baris, 0).toString();
+        txtKamar.setText(noKamar);
     }//GEN-LAST:event_tbKamarMouseClicked
 
     private void itemSidebar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemSidebar2MouseClicked
